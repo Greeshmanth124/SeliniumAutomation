@@ -63,7 +63,7 @@ public class FitPeoAutomation {
 		;
 		String slidervalue = slider.getAttribute("value");
 
-		// Assertion
+		
 		Assert.assertEquals(Integer.parseInt(slider.getAttribute("value")),560);
 		List<WebElement> checkboxes = driver.findElements(
 				By.xpath("//p[text()='CPT-99091' or text()='CPT-99453' or text()='CPT-99454' or text()='CPT-99474']/parent::div//input")
