@@ -1,0 +1,47 @@
+package Bank;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.webdriver.WebDriverBrowser;
+
+public class Bankpage {
+	public static void main(String[] args) throws Throwable {
+		System.setProperty("WebDriver.Chromedriver", "C:\\Users\\mgree\\Downloads\\chromedriver-win32\\chromedriver-win32\\\\chrome.exe");
+		WebDriverManager.chromedriver().setup();
+
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://onlinetestinghelp.com/");
+		driver.manage().window().maximize();
+		driver.findElement(By.xpath(("(//*[@class='close']/span )[1]"))).click();
+
+		WebElement slt=	driver.findElement(By.xpath("//a[contains(text(), 'Projects')]"));
+
+		Select sel= new Select(slt);
+		sel.selectByVisibleText("Banking");
+
+		a[contains(text(), 'Projects')]
+				driver.findElement(By.xpath("//a[text( ) ='Register']")).click();
+		driver.findElement(By.id("user_title"));
+
+		driver.findElement(By.xpath("//input[@name='username']")).sendKeys("Admin");
+		driver.findElement(By.name("password")).sendKeys("admin123");
+		driver.findElement(By.xpath("//button[@type=\"submit\"]")).click();
+		File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		File destFile = new File("./screenshots/img1.jpg");
+		FileUtils.copyFile(srcFile, destFile);
+		driver.close()
+
+
+	}
+}
