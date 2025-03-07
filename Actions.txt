@@ -1,0 +1,61 @@
+package Selenium1;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class A4_DragAndDrop 
+{
+    public static void main(String[] args) throws InterruptedException 
+    {
+      
+        
+      //Opening the firefox Browser
+      		WebDriverManager.firefoxdriver().setup();
+      		WebDriver driver=new FirefoxDriver();
+      		
+      //Opening the WebPage		
+            driver.get("https://demoqa.com/droppable/");
+            
+      //Maximizeing the Webpage      
+            driver.manage().window().maximize();
+            
+            // Add an implicit wait
+            driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10));
+            
+            // Scroll down to the section using scrollIntoView for better accuracy
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            WebElement acceptTab = driver.findElement(By.id("droppableExample-tab-accept"));
+            js.executeScript("arguments[0].scrollIntoView(true);", acceptTab);
+            
+            // Click the "Accept" tab
+            acceptTab.click();
+            
+            // Locate draggable and droppable elements
+            WebElement drag = driver.findElement(By.id("acceptable"));
+            WebElement drop = driver.findElement(By.xpath("//div[@id='acceptDropContainer']//p[text()='Drop here']"));
+            
+            WebElement na=driver.findElement(By.id("notAcceptable"));
+            
+            
+            // Perform drag and drop using Actions class
+            Actions actions = new Actions(driver);
+            actions.dragAndDrop(drag, drop).perform();
+            
+            // Wait for the action to complete visually
+            Thread.sleep(4000);
+            
+            actions.dragAndDrop(na, drop).perform();
+   
+            // Wait for the action to complete visually
+            Thread.sleep(4000);
+            // Ensure the driver closes even if an error occurs
+            driver.quit();
+        
+    }
+}
